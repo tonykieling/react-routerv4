@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './scss/styles.scss';
+import { BrowserRouter as Router } from 'react-router-dom'
+
+import './scss/styles.scss'
 
 class App extends React.Component {
-    constructor() {
-        super();
-    }
+    
     render() {
         return (
+          <Router>
             <h1>Hello World!</h1>
+
+          </Router>
         );
     }
 }
+
+
 /*******************************************/
 ReactDOM.render(<App />, document.getElementById('app'));
