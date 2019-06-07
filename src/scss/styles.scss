@@ -17,7 +17,7 @@ body{
     padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 20px;
-    
+
     .link{
         color: #333;
         font-weight: 500;
@@ -29,4 +29,9 @@ body{
             opacity: 0.75;
         }
     }
+}
+
+.link.active{
+    color: #000;
+    text-decoration: underline;
 }

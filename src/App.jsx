@@ -9,8 +9,10 @@ export default class App extends React.Component {
     render() {
         return (
           <Router>
-            <h1>Hello World!</h1>
-            <HeaderLinks />
+            <div>
+              <HeaderLinks />
+              
+            </div>
           </Router>
         );
     }
