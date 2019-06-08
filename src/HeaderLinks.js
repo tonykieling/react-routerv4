@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 
 export default class HeaderLinks extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+
   render() {
-    // console.log("this.props in HeaderLinks.js", (this.props))
     return (
       <div className="links">
         <NavLink exact to="/" className="link" activeClassName="active">Home</NavLink>
