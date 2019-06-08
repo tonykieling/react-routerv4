@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 
 async function checkUserOnInternet(user) {
-  let response = await fetch(`https://api.github.com/users/${user}`)
-      // .then(response => response.json())
-  let data = await response.json()
+  const response = await fetch(`https://api.github.com/users/${user}`)
+  const data = await response.json()
   console.log("data: ", data)
   return(data)
 }
 
 export default class Home extends Component {
   state = {
-    name: ""
+    name: "",
+    userName: ""
   }
 
   handleChange = e => {
@@ -23,9 +23,9 @@ export default class Home extends Component {
     e.preventDefault()
     console.log("e: ", e.target.name.value)
     const userReceived = e.target.name.value
-    let x = checkUserOnInternet(userReceived)
-      .then(console.log)
-    // console.log("x: ", x)
+    checkUserOnInternet(userReceived)
+      .then(res => this.setState({userName: res.name}))
+      // .then(res => console.log("userName is ", res.name))
   }
 
   render() {
@@ -37,11 +37,16 @@ export default class Home extends Component {
         <form onSubmit={this.handleSubmit} >
           <label>
             Name:
-            <input type= "text" name= "name" value= {this.state.name} onChange={this.handleChange} placeholder= "name, please"
+            <input type= "text" name= "name" value="tonykieling" onChange={this.handleChange} placeholder= "name, please"
             />
             </label>
             <input type="submit" value="Submit" />
         </form>
+
+        {(this.state.userName) ?
+          <h3>{this.state.userName}</h3> :
+          <h3>No name for awhile</h3>
+          }
 
       </div>
     )
