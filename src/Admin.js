@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 
-export default class Home extends Component {
+async function checkUserOnInternet(user) {
+  let response = await fetch(`https://api.github.com/users/${user}`)
+      // .then(response => response.json())
+  let data = await response.json()
+  console.log("data: ", data)
+  return(data)
+}
 
+export default class Home extends Component {
   state = {
     name: ""
   }
@@ -13,7 +20,12 @@ export default class Home extends Component {
   }
 
   handleSubmit = e => {
-    console.log("e: ", JSON.stringify(e))
+    e.preventDefault()
+    console.log("e: ", e.target.name.value)
+    const userReceived = e.target.name.value
+    let x = checkUserOnInternet(userReceived)
+      .then(console.log)
+    // console.log("x: ", x)
   }
 
   render() {
