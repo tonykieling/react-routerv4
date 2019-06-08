@@ -10,41 +10,67 @@ async function checkUserOnInternet(user) {
 export default class Home extends Component {
   state = {
     name: "",
-    userName: ""
+    userName: "",
+    checkboxActive: ""
   }
 
   handleChange = e => {
-    this.setState({
-      name: e.target.value
-    })
+    // console.log(e.target)
+    if(e.target.name === "name"){
+      console.log("e.target.name === 'name'")
+      this.setState({
+        checkboxActive: false,
+        name: e.target.value
+      })
+    } else {
+      console.log("checbox value", e.target.value)
+      if(e.target.value === this.state.name){
+        console.log("==========")
+        e.target.checked = true
+      }
+      this.setState({
+        name: e.target.value,
+        checkboxActive: true
+      })
+    }
   }
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log("e: ", e.target.name.value)
+    // console.log("e: ", e.target.name.name)
     const userReceived = e.target.name.value
     checkUserOnInternet(userReceived)
-      .then(res => this.setState({userName: res.name}))
-      // .then(res => console.log("userName is ", res.name))
+      .then(res => this.setState({userName: res.name || res.login}))
   }
 
   render() {
     return (
       <div>
         <h1>Admin Page</h1>
-        <p>This is an Admin area</p>
-      
         <form onSubmit={this.handleSubmit} >
           <label>
             Name:
-            <input type= "text" name= "name" value="tonykieling" onChange={this.handleChange} placeholder= "name, please"
-            />
-            </label>
+            <input type="text" name="name" value={this.state.name}
+                    onChange={this.handleChange} placeholder="name, please" disabled={this.checkboxActive}
+            /> <br />
+            <input 
+              type="radio" id="torvalds" value="torvalds" name="user" 
+              onChange={this.handleChange} />
+              torvalds<br/>
+            <input 
+              type="radio" id="tonykieling" value="tonykieling" name="user" 
+              onChange={this.handleChange} />
+              tonykieling<br/>
+            <input 
+              type="radio" id="billgates" value="billgates" name="user" 
+              onChange={this.handleChange} />
+              billgates<br/>
+          </label>
             <input type="submit" value="Submit" />
         </form>
 
         {(this.state.userName) ?
-          <h3>{this.state.userName}</h3> :
+          <h3>{ this.state.userName }</h3> :
           <h3>No name for awhile</h3>
           }
 
