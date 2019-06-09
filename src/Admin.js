@@ -32,8 +32,11 @@ export default class Home extends Component {
   handleSubmit = e => {
     e.preventDefault()
     const userReceived = e.target.name.value
-    checkUserOnInternet(userReceived)
-      .then(res => this.setState({userName: res.name || res.login}))
+    if (!userReceived)
+      alert("Please, inform a name to query on github's database")
+    else
+      checkUserOnInternet(userReceived)
+        .then(res => this.setState({userName: res.name || res.login}))
   }
 
   render() {
