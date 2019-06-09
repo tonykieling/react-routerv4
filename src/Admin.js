@@ -63,6 +63,14 @@ export default class Home extends Component {
               type="radio" id="billgates" value="billgates" name="user" 
               onChange={this.handleChange} checked={this.state.name === "billgates"}/>
               billgates<br/>
+            <input 
+              type="radio" id="fabpot" value="fabpot" name="user" 
+              onChange={this.handleChange} checked={this.state.name === "fabpot"}/>
+              fabpot<br/>
+            <input 
+              type="radio" id="richard-stallman" value="richard-stallman" name="user" 
+              onChange={this.handleChange} checked={this.state.name === "richard-stallman"}/>
+              richard-stallman<br/>
           </label>
             <input type="submit" value="Submit" />
         </form>
