@@ -11,22 +11,18 @@ export default class Home extends Component {
   state = {
     name: "",
     userName: "",
+    userLogin: "",
+    userLocation: "",
+    userPublicRepos: "",
+    userCompany: "",
+    userAvatarURL: "",
     checkboxActive: true
   }
 
   handleChange = e => {
-    // if(e.target.name === "name"){
-
       this.setState({
-        // checkboxActive: false,
         name: e.target.value
       })
-    // } else {
-    //   console.log(e.target)
-    //   this.setState({
-    //     name: e.target.value
-    //   })
-    // }
   }
 
   handleSubmit = e => {
@@ -36,7 +32,13 @@ export default class Home extends Component {
       alert("Please, inform a name to query on github's database")
     else
       checkUserOnInternet(userReceived)
-        .then(res => this.setState({userName: res.name || res.login}))
+        .then(res => this.setState({
+          userName: res.name || "empty",
+          userLogin: res.login || "empty",
+          userPublicRepos: res.public_repos || "empty",
+          userCompany: res.company || "empty",
+          userAvatarURL: res.avatar_url || "empty",
+          userLocation: res.location || "empty"}))
   }
 
   render() {
@@ -66,7 +68,14 @@ export default class Home extends Component {
         </form>
 
         {(this.state.userName) ?
-          <h3>{ this.state.userName }</h3> :
+          <div>
+            <h3>Name: { this.state.userName }</h3>
+            <h3>Login: { this.state.userLogin }</h3>
+            <img src={this.state.userAvatarURL} alt="avatar" width="70"/>
+            <h3>Location: { this.state.userLocation }</h3>
+            <h3>Company: { this.state.userCompany}</h3>
+            <h3>Public Repos: { this.state.userPublicRepos }</h3>
+          </div> :
           <h3>No name for awhile</h3>
           }
 
