@@ -11,33 +11,26 @@ export default class Home extends Component {
   state = {
     name: "",
     userName: "",
-    checkboxActive: ""
+    checkboxActive: true
   }
 
   handleChange = e => {
-    // console.log(e.target)
-    if(e.target.name === "name"){
-      console.log("e.target.name === 'name'")
+    // if(e.target.name === "name"){
+
       this.setState({
-        checkboxActive: false,
+        // checkboxActive: false,
         name: e.target.value
       })
-    } else {
-      console.log("checbox value", e.target.value)
-      if(e.target.value === this.state.name){
-        console.log("==========")
-        e.target.checked = true
-      }
-      this.setState({
-        name: e.target.value,
-        checkboxActive: true
-      })
-    }
+    // } else {
+    //   console.log(e.target)
+    //   this.setState({
+    //     name: e.target.value
+    //   })
+    // }
   }
 
   handleSubmit = e => {
     e.preventDefault()
-    // console.log("e: ", e.target.name.name)
     const userReceived = e.target.name.value
     checkUserOnInternet(userReceived)
       .then(res => this.setState({userName: res.name || res.login}))
@@ -55,15 +48,15 @@ export default class Home extends Component {
             /> <br />
             <input 
               type="radio" id="torvalds" value="torvalds" name="user" 
-              onChange={this.handleChange} />
+              onChange={this.handleChange} checked={this.state.name === "torvalds"}/>
               torvalds<br/>
             <input 
               type="radio" id="tonykieling" value="tonykieling" name="user" 
-              onChange={this.handleChange} />
+              onChange={this.handleChange} checked={this.state.name === "tonykieling"}/>
               tonykieling<br/>
             <input 
               type="radio" id="billgates" value="billgates" name="user" 
-              onChange={this.handleChange} />
+              onChange={this.handleChange} checked={this.state.name === "billgates"}/>
               billgates<br/>
           </label>
             <input type="submit" value="Submit" />
